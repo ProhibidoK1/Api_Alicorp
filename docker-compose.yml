@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  api_azure:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api_azure
+    container_name: api_azure
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    networks:
+      - internal_net
+    depends_on: []  # puedes agregar dependencias aquí si las usas
+
+networks:
+  internal_net:
+    driver: bridge
